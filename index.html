@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Event Manager | EventPulse Pro</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="login-screen" class="login-overlay">
+    <div class="login-container">
+        <div class="login-branding">
+            <div class="brand-header">
+                <i class="fas fa-calendar-check"></i>
+                <div>
+                    <h2>EventPulse</h2>
+                    <p>Smart Event Management System</p>
+                </div>
+            </div>
+            <h1>Welcome Organizers! <i class="fas fa-users"></i></h1>
+            <p class="login-desc">EventPulse is exclusively for event organizers to plan, manage, and execute events seamlessly.</p>
+            <div class="login-illustration">
+                <img src="https://cdn-icons-png.flaticon.com/512/2693/2693507.png" alt="Illustration">
+            </div>
+            <div class="restriction-notice">
+                <i class="fas fa-shield-alt"></i>
+                <p>This system is restricted to authorized organizers only. Please login to continue.</p>
+            </div>
+        </div>
+
+        <div class="login-form-box">
+            <div class="form-content">
+                <div class="user-icon-circle">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2>Organizer Login</h2>
+                <p>Sign in to access the organizer dashboard</p>
+
+                <div class="info-alert">
+                    <i class="fas fa-info-circle"></i> Access is limited to authorized organizers only.
+                </div>
+
+                <div class="form-group">
+                    <label>Email / Organizer ID</label>
+                    <div class="input-with-icon">
+                        <i class="far fa-envelope"></i>
+                        <input type="text" id="loginEmail" placeholder="Enter your email or ID">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPass" placeholder="Enter your password">
+                        <i class="far fa-eye toggle-pass"></i>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <label><input type="checkbox"> Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button class="btn-login" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Login as Organizer
+                </button>
+
+                <div class="divider">OR</div>
+
+                <button class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </button>
+
+                <p class="footer-note"><i class="fas fa-lock"></i> Only event organizers can access this system.</p>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="app-shell">
+        
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fas fa-bolt"></i> <span>EventPulse</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" onclick="showSection('dashboard', this)"><i class="fas fa-chart-line"></i> Overview</a>
+                <a href="#" class="nav-item" onclick="showSection('registrations', this)"><i class="fas fa-user-plus"></i> Registrations</a>
+                <a href="#" class="nav-item" onclick="showSection('budget', this)"><i class="fas fa-dollar-sign"></i> Budget</a>
+                <a href="#" class="nav-item" onclick="showSection('tasks', this)"><i class="fas fa-tasks"></i> Tasks</a>
+                <a href="#" class="nav-item" onclick="showSection('schedule', this)"><i class="fas fa-calendar-day"></i> Schedule</a>            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+            </div>
+        </aside>
+
+        <main class="content-wrapper">
+            
+            <header class="top-bar">
+                <h3>Welcome, Admin!</h3>
+                <div class="top-actions">
+                    <button class="btn-primary" onclick="alert('Create Event Flow started')">+ Create New Event</button>
+                    <img src="https://ui-avatars.com/api/?name=Event+Admin" alt="Admin" class="avatar">
+                </div>
+            </header>
+
+            <section id="dashboard" class="page-view active">
+                <div class="dashboard-grid">
+                    
+                    <div class="kpi-card glass">
+                        <i class="fas fa-wallet kpi-icon icon-yellow"></i>
+                        <div><h4>Total Funds Raised</h4><p>$58,760.41</p></div>
+                    </div>
+                    <div class="kpi-card glass">
+                        <i class="fas fa-users kpi-icon icon-green"></i>
+                        <div><h4>Total Registrations</h4><p>11,480</p></div>
+                    </div>
+                    <div class="kpi-card glass">
+                        <i class="fas fa-calendar-check kpi-icon icon-red"></i>
+                        <div><h4>Days to TechFest</h4><p>15</p></div>
+                    </div>
+
+                    <div class="grid-card quick-actions-panel glass">
+                        <h3>Quick Actions</h3>
+                        <p class="desc">Streamline your event experience.</p>
+                        <div class="action-buttons">
+                            <button><i class="fas fa-microphone"></i> Speakers</button>
+                            <button><i class="fas fa-ticket-alt"></i> Tickets</button>
+                            <button><i class="fas fa-table-list"></i> Agenda</button>
+                            <button><i class="fas fa-handshake"></i> Sponsors</button>
+                            <button><i class="fas fa-bullhorn"></i> Promote</button>
+                            <button><i class="fas fa-globe"></i> Website</button>
+                        </div>
+                    </div>
+
+                    <div class="grid-card trend-panel glass">
+                        <div class="card-header">
+                            <h3>Registration Trend</h3>
+                            <button class="btn-text">View more</button>
+                        </div>
+                        <canvas id="trendChart"></canvas>
+                    </div>
+
+                    <div class="grid-card reg-stats-panel glass">
+                        <div class="card-header">
+                            <h3>Registrations</h3>
+                            <button class="btn-secondary">Manage</button>
+                        </div>
+                        <div class="donut-container">
+                            <canvas id="regDonutChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grid-card attendance-panel glass">
+                        <div class="card-header">
+                            <h3>Checked-In (Attendance)</h3>
+                            <button class="btn-secondary">Manage Check-in</button>
+                        </div>
+                        <div class="donut-container">
+                            <canvas id="attendanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="grid-card website-panel glass">
+                        <div class="card-header">
+                            <h3>Event Website</h3>
+                            <div><button class="btn-text">Preview</button> / <button class="btn-text">Edit</button></div>
+                        </div>
+                        <img src="img.png.jpeg" alt="Website Preview" class="web-preview">
+                    </div>
+
+                    <div class="grid-card numbers-panel glass">
+                        <h3>Event Numbers</h3>
+                        <div class="number-grid">
+                            <div class="n-item"><i class="fas fa-layer-group"></i><p>Sessions</p><b>24</b></div>
+                            <div class="n-item"><i class="fas fa-headset"></i><p>Speakers</p><b>12</b></div>
+                            <div class="n-item"><i class="fas fa-users-cog"></i><p>Team</p><b>4</b></div>
+                            <div class="n-item"><i class="fas fa-gift"></i><p>Sponsors</p><b>20</b></div>
+                            <div class="n-item"><i class="fas fa-store"></i><p>Exhibitors</p><b>18</b></div>
+                            <div class="n-item"><i class="fas fa-id-card"></i><p>Badges</p><b>8</b></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="registrations" class="page-view">
+    <div class="view-header">
+        <div>
+            <h2>Student Registrations</h2>
+            <p class="desc">Manage and track participants by department and event.</p>
+        </div>
+        <div class="header-actions">
+            <button class="btn-secondary"><i class="fas fa-download"></i> Export CSV</button>
+            <button class="btn-primary" onclick="openAddStudentModal()">+ Add Student</button>
+        </div>
+    </div>
+
+    <div class="event-tabs">
+        <button class="tab-btn active" onclick="filterRegistrations('TechFest', this)">TechFest 2026</button>
+        <button class="tab-btn" onclick="filterRegistrations('Hackathon', this)">AI Hackathon</button>
+        <button class="tab-btn" onclick="filterRegistrations('Cultural', this)">Cultural Night</button>
+    </div>
+
+    <div class="grid-card glass table-wrapper">
+        <div class="table-controls">
+            <h3 id="currentEventTitle">TechFest 2026 Participants</h3>
+            <input type="text" id="tableSearch" placeholder="Search by name or department..." onkeyup="searchTable()">
+        </div>
+        
+        <table id="registrationTable">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Department</th>
+                    <th>Registration ID</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="registrationBody">
+                </tbody>
+        </table>
+    </div>
+</section>
+<section id="budget" class="page-view">
+    <div class="view-header">
+        <div>
+            <h2>Budget Management</h2>
+            <p class="desc">Track event allocations and category-wise spending.</p>
+        </div>
+        <div class="header-actions">
+            <select id="eventSelector" class="custom-select" onchange="switchEventBudget()">
+                <option value="TechFest">TechFest 2026</option>
+                <option value="Hackathon">AI Hackathon</option>
+                <option value="Cultural">Cultural Night</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="stats-row">
+        <div class="kpi-card glass">
+            <i class="fas fa-coins kpi-icon icon-yellow"></i>
+            <div><h4>Total Allocation</h4><p id="totalAllocated">₹0</p></div>
+        </div>
+        <div class="kpi-card glass">
+            <i class="fas fa-receipt kpi-icon icon-red"></i>
+            <div><h4>Total Spent</h4><p id="totalSpent">₹0</p></div>
+        </div>
+        <div class="kpi-card glass">
+            <i class="fas fa-piggy-bank kpi-icon icon-green"></i>
+            <div><h4>Remaining</h4><p id="remainingAmount">₹0</p></div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid" style="margin-top: 20px;">
+        <div class="grid-card glass" style="grid-column: span 2;">
+            <h3>Add New Expense</h3>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="expCategory" class="custom-select">
+                    <option value="Food">🍔 Food</option>
+                    <option value="Venue">🏢 Venue</option>
+                    <option value="Marketing">📢 Marketing</option>
+                    <option value="Sound">🎤 Stage / Sound</option>
+                    <option value="Misc">🎁 Misc</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" id="expNote" placeholder="e.g. Pizza for volunteers">
+            </div>
+            <div class="form-group">
+                <label>Amount (₹)</label>
+                <input type="number" id="expAmount" placeholder="0.00">
+            </div>
+            <button class="btn-primary" style="width: 100%;" onclick="addNewExpense()">Add Expense</button>
+        </div>
+
+        <div class="grid-card glass" style="grid-column: span 2;">
+            <h3>Category Breakdown</h3>
+            <div style="height: 250px;">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+
+        <div class="grid-card glass" style="grid-column: span 2;">
+            <h3>Recent Expenses</h3>
+            <ul id="expenseHistory" class="history-list">
+                </ul>
+        </div>
+    </div>
+</section>            
+
+<section id="tasks" class="page-view">
+    <div class="view-header">
+        <div>
+            <h2>Task Board</h2>
+            <p class="desc">Manage tasks for your events and track progress in real-time.</p>
+        </div>
+        <div class="header-actions">
+            <div class="date-display glass"><i class="far fa-calendar"></i> May 21, 2025</div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="grid-card glass" style="grid-column: span 2;">
+            <label>Select Event</label>
+            <select id="taskEventSelector" class="custom-select" onchange="switchEventTasks()">
+                <option value="TechFest">Tech Fest</option>
+                <option value="Hackathon">AI Hackathon</option>
+            </select>
+            <p id="totalTaskCount" style="margin-top:10px; color:#64748b;">Total Tasks: 0</p>
+        </div>
+
+        <div class="grid-card glass progress-header-card" style="grid-column: span 4;">
+            <div class="circular-progress-container">
+                <div class="circle-svg">
+                    <svg viewBox="0 0 36 36">
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path id="circleFill" class="circle-progress" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="percentage" id="taskPercentText">0%</div>
+                </div>
+            </div>
+            <div class="progress-stats-box">
+                <h3 id="progressFraction">0 / 0</h3>
+                <p>Tasks Completed</p>
+            </div>
+            <div class="status-summary-pills">
+                <div class="pill blue"><strong>6</strong><br>Completed</div>
+                <div class="pill orange"><strong>4</strong><br>Pending</div>
+                <div class="pill red"><strong>0</strong><br>Overdue</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid-card glass add-task-bar" style="margin-top: 20px;">
+        <div class="input-row">
+            <div class="input-group">
+                <label>Task Name</label>
+                <input type="text" id="taskInput" placeholder="Enter task name">
+            </div>
+            <div class="input-group">
+                <label>Priority</label>
+                <select id="taskPriority" class="custom-select">
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Due Date</label>
+                <input type="date" id="taskDate">
+            </div>
+            <button class="btn-primary" onclick="addNewTask()"><i class="fas fa-plus"></i> Add Task</button>
+        </div>
+    </div>
+
+    <div class="grid-card glass table-wrapper" style="margin-top: 20px;">
+        <table class="pro-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Task Name</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="taskTableBody"></tbody>
+        </table>
+    </div>
+</section>            
+
+<section id="schedule" class="page-view">
+    <div class="view-header">
+        <div>
+            <h2>Event Schedule Manager</h2>
+            <p class="desc">Plan and organize your event schedule in one place.</p>
+        </div>
+        <div class="date-display glass"><i class="far fa-calendar"></i> May 21, 2025</div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="grid-card glass" style="grid-column: span 2;">
+            <label><strong>1. Select Event</strong></label>
+            <select id="schedEventSelector" class="custom-select" onchange="switchSchedule()">
+                <option value="TechFest">Tech Fest 2026</option>
+                <option value="Hackathon">AI Hackathon</option>
+            </select>
+            <div class="info-box-mini">
+                <p id="totalActivities">Total Activities: 0</p>
+            </div>
+        </div>
+
+        <div class="grid-card glass" style="grid-column: span 4;">
+            <label><strong>2. Add New Schedule</strong></label>
+            <div class="input-row" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <input type="text" id="schedTitle" placeholder="Activity Title" style="flex: 2; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                <input type="time" id="schedStart" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                <input type="time" id="schedEnd" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                <input type="text" id="schedLoc" placeholder="Location" style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="addScheduleItem()">
+                <i class="fas fa-plus"></i> Add to Schedule
+            </button>
+        </div>
+    </div>
+
+    <div class="dashboard-grid" style="margin-top: 20px;">
+        <div class="grid-card glass" style="grid-column: span 3;">
+            <div class="card-header">
+                <h3>Schedule List</h3>
+            </div>
+            <table class="pro-table" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; color: #64748b; font-size: 0.85rem;">
+                        <th style="padding: 10px;">#</th>
+                        <th style="padding: 10px;">Activity</th>
+                        <th style="padding: 10px;">Time</th>
+                        <th style="padding: 10px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="schedTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="grid-card glass" style="grid-column: span 3;">
+            <div class="card-header">
+                <h3>Timeline View</h3>
+            </div>
+            <div class="timeline-v-container" id="timelineView">
+                </div>
+        </div>
+    </div>
+</section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
